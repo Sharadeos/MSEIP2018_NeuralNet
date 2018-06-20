@@ -19,7 +19,16 @@ hidden1_output_ThetaWeight = [0 for x in range(hidden1_Count)]
 #Deltas  ^
 #Deltas /_\
 input_hidden1_WeightChange = [[0 for x in range(input_Count)] for y in range(hidden1_Count)] 
-hidden1_output_input_hidden1_WeightChange = [[0 for x in range(hidden1_Count)] for y in range(output_Count)] 
+hidden1_output_WeightChange = [[0 for x in range(hidden1_Count)] for y in range(output_Count)] 
+
+
+deltaOutputLayer =  [0 for x in range(output_Count)]
+deltaHiddenLayer = [0 for x in range(hidden1_Count)]
+	
+#Acceleration
+prevdeltaOutputLayer =  [0 for x in range(output_Count)]
+prevdeltaHiddenLayer = [0 for x in range(hidden1_Count)]
+	
 
 
 hidden_Output = [0 for x in range(input_Count)]
