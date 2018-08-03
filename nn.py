@@ -39,7 +39,7 @@ def resetWeightChange():
 	global hidden1_output_input_hidden1_WeightChange
 	
 	input_hidden1_WeightChange = [[0 for x in range(hidden1_Count)] for y in range(input_Count)] 
-	hidden1_output_WeightChange = [[0 for x in range(output_Count)] for y in range(hidden1_Count)] 
+	hidden1_output_input_hidden1_WeightChange = [[0 for x in range(output_Count)] for y in range(hidden1_Count)] 
 
 def sigmoidFunction(input):
 	return 1/(1+math.exp(-input))
