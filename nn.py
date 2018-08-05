@@ -7,7 +7,7 @@ input_Count = 4
 hidden1_Count = 8
 output_Count = 3
 learningRate = 0.1
-epoch = 1000
+epoch = 500
 
 
 #Weights
@@ -22,10 +22,10 @@ hidden1_output_ThetaWeight = [random.uniform(-1, 1) for x in range(output_Count)
 
          
 input_hidden1_WeightChange = [[0 for x in range(hidden1_Count)] for y in range(input_Count)] 
-hidden1_output_input_hidden1_WeightChange = [[0 for x in range(output_Count)] for y in range(hidden1_Count)] 
+hidden1_output_WeightChange = [[0 for x in range(output_Count)] for y in range(hidden1_Count)] 
 
 accel_input_hidden1_WeightChange = [[0 for x in range(hidden1_Count)] for y in range(input_Count)] 
-accel_hidden1_output_input_hidden1_WeightChange = [[0 for x in range(output_Count)] for y in range(hidden1_Count)] 
+accel_hidden1_output_WeightChange = [[0 for x in range(output_Count)] for y in range(hidden1_Count)] 
 
 
 
@@ -36,10 +36,10 @@ input = []
 
 def resetWeightChange():
 	global input_hidden1_WeightChange
-	global hidden1_output_input_hidden1_WeightChange
+	global hidden1_output_WeightChange
 	
 	input_hidden1_WeightChange = [[0 for x in range(hidden1_Count)] for y in range(input_Count)] 
-	hidden1_output_input_hidden1_WeightChange = [[0 for x in range(output_Count)] for y in range(hidden1_Count)] 
+	hidden1_output_WeightChange = [[0 for x in range(output_Count)] for y in range(hidden1_Count)] 
 
 def sigmoidFunction(input):
 	return 1/(1+math.exp(-input))
@@ -78,7 +78,7 @@ def backPropagation(flower):
 	global hidden1_output_ThetaWeight
 	global input_hidden1_ThetaWeight
 	global accel_input_hidden1_WeightChange
-	global accel_hidden1_output_input_hidden1_WeightChange
+	global accel_hidden1_output_WeightChange
 	
 	sum = 0
 	#Create temporary arrays for storing deltas
@@ -104,9 +104,9 @@ def backPropagation(flower):
 	
 	for i in range(hidden1_Count):
 		for j in range(output_Count):
-			hidden1_output_input_hidden1_WeightChange[i][j] = (learningRate * deltaOutputLayer[j] * hidden_Output[i])
-			hidden1_output_LayerWeight[i][j] += hidden1_output_input_hidden1_WeightChange[i][j] + 0.95*accel_hidden1_output_input_hidden1_WeightChange[i][j]
-			accel_hidden1_output_input_hidden1_WeightChange[i][j] = hidden1_output_input_hidden1_WeightChange[i][j]
+			hidden1_output_WeightChange[i][j] = (learningRate * deltaOutputLayer[j] * hidden_Output[i])
+			hidden1_output_LayerWeight[i][j] += hidden1_output_WeightChange[i][j] + 0.95*accel_hidden1_output_WeightChange[i][j]
+			accel_hidden1_output_WeightChange[i][j] = hidden1_output_WeightChange[i][j]
 			
 	for i in range(input_Count):
 		for j in range(hidden1_Count):
